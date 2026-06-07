@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>页面未找到 | 404</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 动态漂浮粒子背景 */
+        .bg-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 18s infinite ease-in-out;
+        }
+
+        .orb:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: -150px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0) 70%);
+            animation-duration: 22s;
+        }
+
+        .orb:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            bottom: -200px;
+            right: -150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        .orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            right: 10%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(236, 72, 153, 0) 70%);
+            animation-duration: 19s;
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(30px, 40px) scale(1.05);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        /* 主卡片 */
+        .error-container {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            padding: 2rem 2rem 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            .error-container {
+                padding: 1.5rem 1.5rem 2.5rem;
+                border-radius: 40px;
+            }
+        }
+
+        /* 404 动态图形区 */
+        .glitch-wrapper {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .error-code {
+            font-size: clamp(6rem, 18vw, 11rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4e 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 6px 6px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: "404";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4e 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            opacity: 0.7;
+        }
+
+        .glitch-effect::before {
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            left: -2px;
+            text-shadow: -2px 0 #ff4d6d;
+        }
+
+        .glitch-effect::after {
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+            left: 2px;
+            text-shadow: 2px 0 #3b82f6;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-2px, 1px);
+            }
+            40% {
+                transform: translate(-1px, -1px);
+            }
+            60% {
+                transform: translate(1px, 1px);
+            }
+            80% {
+                transform: translate(1px, -1px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(2px, -1px);
+            }
+            40% {
+                transform: translate(1px, 1px);
+            }
+            60% {
+                transform: translate(-1px, -1px);
+            }
+            80% {
+                transform: translate(-2px, 1px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        /* 插图区域 (轻量SVG) */
+        .lost-illustration {
+            margin: 0.5rem 0 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .astronaut {
+            width: 180px;
+            max-width: 60%;
+            opacity: 0.85;
+            filter: drop-shadow(0 10px 12px rgba(0,0,0,0.05));
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .error-container:hover .astronaut {
+            transform: translateY(-8px) rotate(2deg);
+        }
+
+        /* 文案 */
+        .title {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 700;
+            background: linear-gradient(120deg, #0f172a, #334155);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin: 1rem 0 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #475569;
+            max-width: 420px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+            background: rgba(255,255,240,0.3);
+            backdrop-filter: blur(4px);
+            padding: 0.25rem 0.5rem;
+            border-radius: 60px;
+        }
+
+        /* 返回主页按钮 - 优雅玻璃质感 */
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #0f172a;
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(2px);
+            cursor: pointer;
+        }
+
+        .home-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .home-button:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+            box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.35);
+            gap: 16px;
+        }
+
+        .home-button:hover svg {
+            transform: translateX(-4px);
+        }
+
+        .home-button:active {
+            transform: scale(0.98);
+        }
+
+        /* 额外小提示 */
+        .hint {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hint span {
+            background: rgba(148, 163, 184, 0.15);
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 500px) {
+            .home-button {
+                padding: 0.75rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            .description {
+                font-size: 0.9rem;
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* 精致的加载与焦点效果 */
+        .home-button:focus-visible {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-orb">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+</div>
+
+<div class="error-container">
+    <div class="glitch-wrapper">
+        <div class="glitch-effect">
+            <div class="error-code">404</div>
+        </div>
+    </div>
+    
+    <div class="lost-illustration">
+        <!-- 美观的SVG太空迷失主题，与404 搭配 柔和且现代 -->
+        <svg class="astronaut" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="2 2"/>
+            <path d="M60 32C51.1634 32 44 39.1634 44 48C44 56.8366 51.1634 64 60 64C68.8366 64 76 56.8366 76 48C76 39.1634 68.8366 32 60 32Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2"/>
+            <circle cx="52" cy="46" r="3" fill="#0F172A"/>
+            <circle cx="68" cy="46" r="3" fill="#0F172A"/>
+            <path d="M56 54C57.5 56.5 62.5 56.5 64 54" stroke="#334155" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="58" y="70" width="4" height="12" rx="2" fill="#94A3B8" transform="rotate(-15 58 70)"/>
+            <rect x="72" y="66" width="4" height="12" rx="2" fill="#94A3B8" transform="rotate(15 72 66)"/>
+            <circle cx="60" cy="80" r="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="1.5 1.5"/>
+            <path d="M54 80L66 80M60 74L60 86" stroke="#CBD5E1" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M36 70L28 74L36 78" stroke="#94A3B8" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M84 70L92 74L84 78" stroke="#94A3B8" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M48 90L44 102" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M72 90L76 102" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round"/>
+            <!-- 小星球环 -->
+            <ellipse cx="92" cy="30" rx="10" ry="4" fill="none" stroke="#A5B4FC" stroke-width="1.2" stroke-dasharray="2 2" transform="rotate(-20 92 30)"/>
+            <circle cx="92" cy="30" r="3" fill="#C7D2FE"/>
+        </svg>
+    </div>
+
+    <h1 class="title">页面飘到外太空了</h1>
+    <p class="description">哎呀，您访问的页面好像乘着流星溜走了～ 试试返回地球，回到主页重新探索吧！</p>
+    
+    <a href="/" class="home-button" id="homeLink">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3L21 9.5M5 9.5V19C5 19.5523 5.44772 20 6 20H9M19 9.5V19C19 19.5523 18.5523 20 18 20H15M9 20H15M9 20V15C9 13.8954 9.89543 13 11 13H13C14.1046 13 15 13.8954 15 15V20"/>
+        </svg>
+        <span>返回首页</span>
+    </a>
+    
+    <div class="hint">
+        <span>✨ 迷路没关系</span>
+        <span>🔍 检查链接或返回主页</span>
+    </div>
+</div>
+
+<!-- 确保回到根路径的流畅体验，另外防止点击默认行为（a标签已经处理，但额外添加平滑控制） -->
+<script>
+    (function() {
+        // 增强按钮的返回主页功能，确保SPA环境或普通环境都能准确回到 "/"
+        const homeBtn = document.getElementById('homeLink');
+        if (homeBtn) {
+            // 确保点击事件完美指向根路径，并增加简单的控制台优雅反馈（不影响体验）
+            homeBtn.addEventListener('click', function(event) {
+                // 如果已经指向 "/"，不用额外逻辑，但保证浏览器行为一致
+                // 若用户需要强制根路径，同时避免自定义干扰
+                const currentTargetHref = homeBtn.getAttribute('href');
+                if (currentTargetHref === '/' || currentTargetHref === '#/') {
+                    // 原生行为足够可靠，但为了防止有些框架劫持，我们确保直接跳转
+                    // 不做 preventDefault 让浏览器自然跳转
+                    return true;
+                }
+                // 如果某些动态环境href被修改意外, 则强行设定根路径并跳转
+                if (currentTargetHref !== '/') {
+                    event.preventDefault();
+                    window.location.href = '/';
+                }
+            });
+        }
+        
+        // 可选：添加键盘快捷键支持（按Home键跳转或ESC趣味，但非必要，做一点小细节）
+        document.addEventListener('keydown', function(e) {
+            // 按 "h" 键也可以回到主页 (增加可访问性的小彩蛋)
+            if (e.key === 'h' || e.key === 'H') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    window.location.href = '/';
+                }
+            }
+            // 另外按ESC显示友好提示（只是为了好玩不干涉及主要功能）
+            if (e.key === 'Escape') {
+                const hintDiv = document.querySelector('.hint');
+                if (hintDiv) {
+                    const originalText = hintDiv.innerHTML;
+                    hintDiv.style.transition = 'all 0.2s';
+                    hintDiv.style.opacity = '0.7';
+                    hintDiv.innerHTML = `<span>🚀 试试按 H 键直接回家~</span>`;
+                    setTimeout(() => {
+                        hintDiv.style.opacity = '1';
+                        setTimeout(() => {
+                            hintDiv.innerHTML = originalText;
+                        }, 1800);
+                    }, 200);
+                }
+            }
+        });
+        
+        // 精致控制台问候
+        console.log("%c✨ 404 页面 | 世界很大，我们随时欢迎您回家 ✨", "color: #3b82f6; font-size: 14px; font-weight: bold;");
+        console.log("%c点击主页按钮或按 H 键返回首页 /", "color: #475569; font-size: 12px;");
+        
+        // 添加平滑的页面预加载（只是为了让首页跳转不显得突兀，简单预读取 / 不重要但优雅）
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = '/';
+                document.head.appendChild(link);
+            });
+        }
+    })();
+</script>
+
+<!-- 确保任何旧版浏览器后备，同时保证视觉一致，所有内容就绪 -->
+</body>
+</html>
