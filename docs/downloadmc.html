@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合并下载</title>
+</head>
+<body>
+    <button id="btn">下载 MC.exe</button>
+    <div id="status" style="margin-top:12px;font-family:monospace;"></div>
+
+    <script>
+        const TOTAL = 42;  // 总片数，改成你的实际片数
+        const baseUrl = location.href.replace(/\/[^/]*$/, '/');  // 当前目录
+
+        document.getElementById('btn').addEventListener('click', async () => {
+            const status = document.getElementById('status');
+            status.textContent = '下载中...';
+
+            try {
+                let full = '';
+                for (let i = 1; i <= TOTAL; i++) {
+                    const resp = await fetch(baseUrl + 'chunk' + i);
+                    if (!resp.ok) throw new Error(`chunk${i}: HTTP ${resp.status}`);
+                    full += await resp.text();
+                    status.textContent = `合并中 ${i}/${TOTAL}`;
+                }
+
+                // Base64 解码
+                const bin = atob(full);
+                const bytes = new Uint8Array(bin.length);
+                for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+
+                // 下载
+                const blob = new Blob([bytes]);
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'MC.exe';
+                a.click();
+                URL.revokeObjectURL(a.href);
+
+                status.textContent = '✅ 下载完成！';
+            } catch (e) {
+                status.textContent = '❌ 失败: ' + e.message;
+            }
+        });
+    </script>
+</body>
+</html>
